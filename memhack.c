@@ -147,10 +147,9 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 	char* pid_c = malloc(sizeof(*argv[1]));
-	strncpy(pid_c, argv[1], strlen(argv[1]));printf("\033[42;31mline105\033[0m\n");
-	//pid_c = argv[1];
+	pid_c = argv[1];
 
-	pid = atoi(pid_c);
+	pid = atoi(pid_c);printf("\033[42;31mline105\033[0m\n");
 	char cmd[15];
 	init(pid_c);
 	memset(valid_addr, 0, sizeof(valid_addr));

@@ -96,7 +96,7 @@ void init(char* pid_c)
 	
 	regex_t data_seg;	
 	char* pattern_data_seg = "[0-9,a-d]{8}-[0-9,a-d]{8} rw-p";
-	/*int p_data_seg =*/ regcomp(&data_seg, pattern_data_seg, REG_EXTENDED);printf("\033[42;35mpid:%d\033[0m\n",pid);
+	/*int p_data_seg =*/ regcomp(&data_seg, pattern_data_seg, REG_EXTENDED);
 	regmatch_t pm_data_seg[1];
 	regex_t stop;
 	char* pattern_stop = "[h,e,a,p]{4}]";
@@ -106,6 +106,7 @@ void init(char* pid_c)
 	char* f_line = NULL;
 	while (!feof(fp)) 
     {   
+    	printf("\033[42;32mpid:%d\033[0m\n",pid);
         if(fgets(f_line, 1024,fp)){
 	        printf("%s", f_line);       
 	        if(!regexec(&stop,f_line,1,pm_stop,0)){

@@ -103,7 +103,7 @@ void init(char* pid_c)
 	/*int p_stop =*/ regcomp(&stop, pattern_stop, REG_EXTENDED);
 	regmatch_t pm_stop[1];
 	
-	char* f_line = NULL;//malloc(1024);
+	char* f_line = malloc(1024);
 	while (!feof(fp)) 
     {   
     	

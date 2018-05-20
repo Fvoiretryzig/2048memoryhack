@@ -139,6 +139,7 @@ int main(int argc, char *argv[])
 	printf("\033[42;37mline 140\033[0m\n");
 	for (int i = 0; i < argc; i++) {
 		assert(argv[i]); // specification
+		printf("argv[%d] = %s\n", i, argv[i]);
 	}
 	assert(!argv[argc]); // specification	
 	if(argc == 1){

@@ -149,12 +149,12 @@ int main(int argc, char *argv[])
 	printf("\033[42;37mline 148\033[0m\n");
 	strncpy(pid_c, argv[1], strlen(argv[1]));
 	pid = atoi(pid_c);
-	char* cmd = NULL;
+	char cmd[15];
 	init(pid_c);
 	memset(valid_addr, 0, sizeof(valid_addr));
 	valid_addr_cnt = 0;
 	printf("\033[42;37mline 155\033[0m\n");
-	while(fgets(cmd, 15, stdin) != NULL){
+	while(fgets(cmd, sizeof(cmd), stdin) != NULL){
 		if(!strcmp(cmd, "pause")){
 			pause();
 		}

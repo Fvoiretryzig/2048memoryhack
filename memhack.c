@@ -41,7 +41,7 @@ void lookup()
 			int data = ptrace(PTRACE_PEEKDATA, pid, addr, NULL);
 			if(data == num){
 				if(valid_addr_cnt == 0){
-					valid_addr[temp_cnt++] = i;
+					valid_addr[temp_cnt++] = addr;
 				}
 				else{
 					temp_addr[temp_cnt++] = i;
@@ -111,7 +111,7 @@ void init()
         	break;
         }     
         else{	//应该只会有一个数据段吧
-        	if(!regexec(&data_seg,f_line,1,pm_data_seg,0){
+        	if(!regexec(&data_seg,f_line,1,pm_data_seg,0)){
 				char* start = NULL; char* end = NULL;
 				int point = 0;
 				for(point = pm_data_seg[0].rm_so; point<pm_data_seg[0].rm_eo; point++){
@@ -130,7 +130,7 @@ void init()
         	}
         }  
     } 
-    regfree(data_seg); regfree(stop);	
+    regfree(&data_seg); regfree(&stop);	
 }
 int main(int argc, char *argv[]) 
 {
@@ -156,15 +156,15 @@ int main(int argc, char *argv[])
 			resume();
 		}
 		else if(strcmp(cmd, "lookup") > 0){
-			char* command = strtok(cmd, " ");
-			char* num_c = strtok(NULL, " ");
-			num = atoi(num_c);
+			char* temp = strtok(cmd, " ");
+			temp = strtok(NULL, " ");
+			num = atoi(temp);
 			lookup();
 		}
 		else if(!strcmp(cmd, "setup")){
-			char* command = strtok(cmd, " ");
-			char* edit_num_c = strtok(NULL, " ");
-			edit_num = atoi(edit_num_c);
+			char* temp = strtok(cmd, " ");
+			temp = strtok(NULL, " ");
+			edit_num = atoi(temp);
 			setup();
 		}
 		else{

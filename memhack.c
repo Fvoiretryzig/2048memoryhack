@@ -94,11 +94,11 @@ void init(char* pid_c)
 	FILE* fp = NULL;
 	fp = fopen(filename, "a+");
 	
-	regex_t data_seg;	
+	const regex_t data_seg;	
 	char* pattern_data_seg = "[0-9,a-d]{8}-[0-9,a-d]{8} rw-p";
 	/*int p_data_seg =*/ regcomp(&data_seg, pattern_data_seg, REG_EXTENDED);
 	regmatch_t pm_data_seg[1];
-	regex_t stop;
+	const regex_t stop;
 	char* pattern_stop = "[h,e,a,p]{4}]";
 	/*int p_stop =*/ regcomp(&stop, pattern_stop, REG_EXTENDED);
 	regmatch_t pm_stop[1];
@@ -113,7 +113,6 @@ void init(char* pid_c)
 	        	break;
 	        }     
 	        else{	//应该只会有一个数据段吧
-	        	printf("\033[45;33min else f_line;%s\033[0m\n",f_line);
 	        	if(!regexec(&data_seg,f_line,1,pm_data_seg,0)){printf("\033[44;33mpid:%d\033[0m\n",pid);
 					char* start = NULL; char* end = NULL;
 					int point = 0;

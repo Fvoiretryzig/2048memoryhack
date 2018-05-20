@@ -107,8 +107,8 @@ void init(char* pid_c)
 	while (!feof(fp)) 
     {   
     	
-        if(fgets(&f_line, 1024,fp)){
-	        printf("%s", f_line, strlen(f_line));  
+        if(fgets((char*)f_line, 1024,fp)){
+	        printf("%s length:%d\n", f_line, strlen(f_line));  
 	        //f_line[strlen(f_line)+1] = NULL;
 	        //printf("%s", f_line);  
 	        int ret = regexec(&stop,f_line,1,pm_stop,0);

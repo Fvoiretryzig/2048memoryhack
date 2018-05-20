@@ -154,7 +154,7 @@ int main(int argc, char *argv[])
 	memset(valid_addr, 0, sizeof(valid_addr));
 	valid_addr_cnt = 0;
 	printf("\033[42;37mline 155\033[0m\n");
-	while(fgets(cmd, sizeof(cmd), stdin) != NULL){
+	while(fgets(cmd, sizeof(cmd), stdin)){
 		printf("\033[42;31mhahaha\033[0m\n");
 		if(!strcmp(cmd, "pause")){
 			pause();

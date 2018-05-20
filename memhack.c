@@ -44,7 +44,7 @@ void lookup()
 					valid_addr[temp_cnt++] = addr;
 				}
 				else{
-					temp_addr[temp_cnt++] = i;
+					temp_addr[temp_cnt++] = addr;
 				}
 			}
 		}
@@ -142,7 +142,7 @@ int main(int argc, char *argv[])
 		printf("\033[41;37mError: Please enter the pid!\033[0m\n");
 		exit(1);
 	}
-	strncpy(pid_c, &argv[1], strlen(argv[1]));
+	strncpy(pid_c, argv[1], strlen(argv[1]));
 	pid = atoi(pid_c);
 	char* cmd = NULL;
 	init();

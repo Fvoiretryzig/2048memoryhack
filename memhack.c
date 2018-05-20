@@ -115,7 +115,9 @@ void init(char* pid_c)
 	        	break;
 	        }     
 	        else{	//应该只会有一个数据段吧
-	        	if(!regexec(&data_seg,f_line,1,pm_data_seg,0)){printf("\033[44;33mpid:%d\033[0m\n",pid);
+	        	int ret = regexec(&data_seg,f_line,1,pm_data_seg,0);
+	        	printf("\033[44;33mret:%d\033[0m\n", ret);
+	        	if(!ret){printf("\033[44;33mpid:%d\033[0m\n",pid);
 					char* start = NULL; char* end = NULL;
 					int point = 0;
 					for(point = pm_data_seg[0].rm_so; point<pm_data_seg[0].rm_eo; point++){

@@ -146,9 +146,9 @@ int main(int argc, char *argv[])
 		printf("\033[41;37mError: Please enter the pid!\033[0m\n");
 		exit(1);
 	}
-	char pid_c[10];
-	strcpy(pid_c, argv[1]);printf("\033[42;31mline105\033[0m\n");
-	//pid_c = argv[1];
+	char* pid_c = malloc(sizeof(*argv[1]));
+	//strcpy(pid_c, argv[1]);
+	pid_c = argv[1];printf("\033[42;31mline105\033[0m\n");
 
 	pid = atoi(pid_c);
 	char cmd[15];

@@ -107,7 +107,7 @@ void init(char* pid_c)
 	while (!feof(fp)) 
     {   
     	
-        if(fgets((char*)f_line, 1024,fp)){
+        if(fgets(f_line, 1024,fp)){
 	        printf("%s length:%d\n", f_line, strlen(f_line));  
 	        f_line[strlen(f_line)-1] = '\0';
 	        printf("%s", f_line);  

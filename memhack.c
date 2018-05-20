@@ -92,8 +92,8 @@ void init(char* pid_c)
 	strcat(filename, pid_c);
 	strcat(filename, "/maps");
 	FILE* fp = NULL;
-	fp = fopen(filename, "r");
-	
+	fp = fopen(filename, "a");
+	printf("\033[42;31mline105\033[0m\n");
 	regex_t data_seg;	
 	char* pattern_data_seg = "[0-9,a-d]{8}-[0-9,a-d]{8} rw-p";
 	/*int p_data_seg =*/ regcomp(&data_seg, pattern_data_seg, REG_EXTENDED);
@@ -102,7 +102,7 @@ void init(char* pid_c)
 	char* pattern_stop = "[h,e,a,p]{4}]";
 	/*int p_stop =*/ regcomp(&stop, pattern_stop, REG_EXTENDED);
 	regmatch_t pm_stop[1];
-	printf("\033[42;31mline105\033[0m\n");
+	
 	char* f_line = NULL;
 	while (!feof(fp)) 
     {   

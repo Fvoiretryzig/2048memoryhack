@@ -99,7 +99,7 @@ void init()
 	regmatch_t pm_data_seg[1];
 	regex_t stop;
 	char* pattern_stop = "\[heap\]]";
-	/*int p_stop*/ = regcomp(&stop, pattern_stop, REG_EXTENDED);
+	/*int p_stop =*/ regcomp(&stop, pattern_stop, REG_EXTENDED);
 	regmatch_t pm_stop[1];
 	
 	char* f_line = NULL;

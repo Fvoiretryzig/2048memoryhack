@@ -97,17 +97,19 @@ void init(char* pid_c)
 	regex_t data_seg;	
 	char* pattern_data_seg = "[0-9,a-d]{8}-[0-9,a-d]{8} rw-p";
 	/*int p_data_seg =*/ regcomp(&data_seg, pattern_data_seg, REG_EXTENDED);
-	regmatch_t pm_data_seg[5];
+	regmatch_t pm_data_seg[1];
 	regex_t stop;
 	char* pattern_stop = "[h,e,a,p]{4}]";
 	/*int p_stop =*/ regcomp(&stop, pattern_stop, REG_EXTENDED);
-	regmatch_t pm_stop[5];
+	regmatch_t pm_stop[1];
 	
 	char* f_line = malloc(1024);
 	while (!feof(fp)) 
     {   
     	
         if(fgets(f_line, 1024,fp)){
+	        printf("%s", f_line);  
+	        f_line[strlen(f_line)+1] = NULL;
 	        printf("%s", f_line);  
 	        int ret = regexec(&stop,f_line,1,pm_stop,0);
 	        	printf("\033[44;33mret:%d\033[0m\n", ret);

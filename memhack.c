@@ -91,7 +91,6 @@ void init(char* pid_c)
 	strcpy(filename, "/proc/");
 	strcat(filename, pid_c);
 	strcat(filename, "/maps");
-	//printf("filename:%s\n", filename);
 	FILE* fp = NULL;
 	fp = fopen(filename, "a+");
 	
@@ -107,13 +106,14 @@ void init(char* pid_c)
 	char* f_line = malloc(1024);
 	while (!feof(fp)) 
     {   
-    	printf("\033[44;33mpid:%d\033[0m\n",pid);
+    	
         if(fgets(f_line, 1024,fp)){
 	        printf("%s", f_line);       
 	        if(!regexec(&stop,f_line,1,pm_stop,0)){
 	        	break;
 	        }     
 	        else{	//应该只会有一个数据段吧
+	        	printf("\033[44;33mpid:%d\033[0m\n",pid);
 	        	if(!regexec(&data_seg,f_line,1,pm_data_seg,0)){
 					char* start = NULL; char* end = NULL;
 					int point = 0;

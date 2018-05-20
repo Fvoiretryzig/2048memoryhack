@@ -37,8 +37,8 @@ void lookup()
 	int temp_addr[1024]; int temp_cnt = 0;
 	int overlap[1024];	int overlap_cnt = 0;
 	if(if_pause){
-		for(int addr = addr_start; addr<addr_end; i=i+4){
-			int data = ptrace(PTRACE_PEEKUSR, pid, addr, NULL);
+		for(int addr = addr_start; addr<addr_end; addr=addr+4){
+			int data = ptrace(PTRACE_PEEKDATA, pid, addr, NULL);
 			if(data == num){
 				if(valid_addr_cnt == 0){
 					valid_addr[temp_cnt++] = i;
@@ -80,13 +80,16 @@ void lookup()
 void setup()
 {
 	if(if_pause){
-		ptrace(PRTACE_POKEDATA, pid, edit_addr, edit_num);
+		ptrace(PTRACE_POKEDATA, pid, edit_addr, edit_num);
 	}
 	return;
 }
 void init()
 {
-	char* filename = "/proc/" + pid_c + "maps";
+	char* filename = NULL;
+	strcpy(filename, "/proc/");
+	strcat(filename, pid_c);
+	strcat(filename, "/maps");
 	FILE* fp = NULL;
 	fp = fopen(filename, "r");
 	

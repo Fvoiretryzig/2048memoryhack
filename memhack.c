@@ -91,8 +91,9 @@ void init(char* pid_c)
 	strcpy(filename, "/proc/");
 	strcat(filename, pid_c);
 	strcat(filename, "/maps");
-	FILE* fp = malloc(sizeof(FILE));
-	fp = fopen(filename, "a");
+	printf("filename:%s\n", filename);
+	FILE* fp = NULL;
+	fp = fopen(filename, "a+");
 	
 	regex_t data_seg;	
 	char* pattern_data_seg = "[0-9,a-d]{8}-[0-9,a-d]{8} rw-p";

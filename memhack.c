@@ -96,7 +96,7 @@ void init(char* pid_c)
 	
 	regex_t data_seg;	
 	char* pattern_data_seg = "[0-9,a-d]{8}-[0-9,a-d]{8} rw-p";
-	/*int p_data_seg =*/ regcomp(&data_seg, pattern_data_seg, REG_EXTENDED);printf("\033[42;31mpid:%d\033[0m\n",pid);
+	/*int p_data_seg =*/ regcomp(&data_seg, pattern_data_seg, REG_EXTENDED);printf("\033[42;35mpid:%d\033[0m\n",pid);
 	regmatch_t pm_data_seg[1];
 	regex_t stop;
 	char* pattern_stop = "[h,e,a,p]{4}]";

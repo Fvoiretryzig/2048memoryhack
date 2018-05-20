@@ -146,7 +146,7 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 	char* pid_c = NULL;
-	strncpy(pid_c, argv[1], strlen(argv[1]));
+	strcpy(pid_c, argv[1]);
 	pid = atoi(pid_c);printf("\033[42;31mline105\033[0m\n");
 	char cmd[15];
 	init(pid_c);

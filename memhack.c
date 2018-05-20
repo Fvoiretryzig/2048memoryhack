@@ -91,7 +91,7 @@ void init(char* pid_c)
 	strcpy(filename, "/proc/");
 	strcat(filename, pid_c);
 	strcat(filename, "/maps");
-	printf("filename:%s\n", filename);
+	//printf("filename:%s\n", filename);
 	FILE* fp = NULL;
 	fp = fopen(filename, "a+");
 	

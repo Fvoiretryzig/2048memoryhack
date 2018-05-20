@@ -92,7 +92,7 @@ void init(char* pid_c)
 	strcat(filename, pid_c);
 	strcat(filename, "/maps");
 	FILE* fp = NULL;
-	fp = fopen(filename, "a+");
+	fp = fopen(filename, "r");
 	
 	regex_t data_seg;	
 	char* pattern_data_seg = "[0-9,a-d]{8}-[0-9,a-d]{8} rw-p";

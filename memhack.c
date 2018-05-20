@@ -87,7 +87,7 @@ void setup()
 }
 void init(char* pid_c)
 {
-	char* filename = NULL;
+	char filename[32];
 	strcpy(filename, "/proc/");
 	strcat(filename, pid_c);
 	strcat(filename, "/maps");

@@ -91,7 +91,7 @@ void init(char* pid_c)
 	strcpy(filename, "/proc/");
 	strcat(filename, pid_c);
 	strcat(filename, "/maps");
-	FILE* fp = NULL;
+	FILE* fp = malloc(sizeof(FILE));
 	fp = fopen(filename, "a");
 	
 	regex_t data_seg;	
@@ -103,7 +103,7 @@ void init(char* pid_c)
 	/*int p_stop =*/ regcomp(&stop, pattern_stop, REG_EXTENDED);
 	regmatch_t pm_stop[1];
 	
-	char f_line[1024];
+	char* f_line = malloc(1024);
 	while (!feof(fp)) 
     {   
     	printf("\033[44;33mpid:%d\033[0m\n",pid);

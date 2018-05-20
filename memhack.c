@@ -5,7 +5,6 @@
 #include <assert.h>
 #include <stdlib.h>
 
-char* pid_c;
 int pid;
 int addr_start, addr_end;
 int valid_addr[1024];
@@ -18,18 +17,20 @@ void pause()
 {
 	if_pause = 1;
 	if(ptrace(PTRACE_ATTACH, (pid_t)pid, NULL, NULL) == -1){
-		printf("error when pause\n");
+		printf("\033[41;37merror when pause\033[0m\n");
 		exit(1);
 	}
+	printf("\033[46;37mSuccessfully pause!\033[0m\n" );
 	return;
 }
 void resume()
 {
 	if_pause = 0;
 	if(ptrace(PTRACE_DETACH, (pid_t)pid, NULL, NULL) == -1){
-		printf("error when resume\n");
+		printf("\033[41;37merror when resume\033[0m\n");
 		exit(1);
 	}
+	printf("\033[46;37mSuccessfully resume!\033[0m\n");
 	return;
 }
 void lookup()
@@ -84,7 +85,7 @@ void setup()
 	}
 	return;
 }
-void init()
+void init(char* pid_c)
 {
 	char* filename = NULL;
 	strcpy(filename, "/proc/");
@@ -135,6 +136,7 @@ void init()
 }
 int main(int argc, char *argv[]) 
 {
+	printf("\033[42;37mline 140\033[0m\n");
 	for (int i = 0; i < argc; i++) {
 		assert(argv[i]); // specification
 	}
@@ -143,12 +145,15 @@ int main(int argc, char *argv[])
 		printf("\033[41;37mError: Please enter the pid!\033[0m\n");
 		exit(1);
 	}
+	char* pid_c = NULL;
+	printf("\033[42;37mline 148\033[0m\n");
 	strncpy(pid_c, argv[1], strlen(argv[1]));
 	pid = atoi(pid_c);
 	char* cmd = NULL;
 	init();
 	memset(valid_addr, 0, sizeof(valid_addr));
 	valid_addr_cnt = 0;
+	printf("\033[42;37mline 155\033[0m\n");
 	while(fgets(cmd, 15, stdin) != NULL){
 		if(!strcmp(cmd, "pause")){
 			pause();

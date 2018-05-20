@@ -1,3 +1,173 @@
-int main(int argc, char *argv[]) {
-  return 0;
+#include <sys/ptrace.h>
+#include <stdio.h>
+#include <string.h>
+#include <regex.h>
+#include <assert.h>
+#include <stdlib.h>
+
+char* pid_c;
+int pid;
+int addr_start, addr_end;
+int valid_addr[1024];
+int valid_addr_cnt;
+int edit_addr;
+int num;
+int edit_num;
+int if_pause;
+void pause()
+{
+	if_pause = 1;
+	if(ptrace(PTRACE_ATTACH, (pid_t)pid, NULL, NULL) == -1){
+		printf("error when pause\n");
+		exit(1);
+	}
+	return;
+}
+void resume()
+{
+	if_pause = 0;
+	if(ptrace(PTRACE_DETACH, (pid_t)pid, NULL, NULL) == -1){
+		printf("error when resume\n");
+		exit(1);
+	}
+	return;
+}
+void lookup()
+{
+	int temp_addr[1024]; int temp_cnt = 0;
+	int overlap[1024];	int overlap_cnt = 0;
+	if(if_pause){
+		for(int addr = addr_start; addr<addr_end; i=i+4){
+			int data = ptrace(PTRACE_PEEKUSR, pid, addr, NULL);
+			if(data == num){
+				if(valid_addr_cnt == 0){
+					valid_addr[temp_cnt++] = i;
+				}
+				else{
+					temp_addr[temp_cnt++] = i;
+				}
+			}
+		}
+		if(valid_addr_cnt == 0){
+			valid_addr_cnt = temp_cnt;
+			return;
+		}
+		else{
+			for(int i = 0; i<temp_cnt; i++){
+				for(int j = 0; j<valid_addr_cnt; j++){
+					if(temp_addr[i] == valid_addr[j]){
+						overlap[overlap_cnt++] = temp_addr[i];
+					}
+				}		
+			}
+			if(overlap_cnt == 1){
+				edit_addr = overlap[0];
+				return;
+			}
+			else{
+				for(int i = 0; i<valid_addr_cnt; i++){
+					valid_addr[i] = 0;
+				}
+				for(int i = 0; i<overlap_cnt; i++){
+					valid_addr[i] = overlap[i];
+				}
+				valid_addr_cnt = overlap_cnt;
+			}
+		}	
+	}
+	return;
+}
+void setup()
+{
+	if(if_pause){
+		ptrace(PRTACE_POKEDATA, pid, edit_addr, edit_num);
+	}
+	return;
+}
+void init()
+{
+	char* filename = "/proc/" + pid_c + "maps";
+	FILE* fp = NULL;
+	fp = fopen(filename, "r");
+	
+	regex_t data_seg;	
+	char* pattern_data_seg = "[0-9,a-d]{8}-[0-9,a-d]{8}\srw-p";
+	int p_data_seg = regcomp(&data_seg, pattern_data_seg, REG_EXTENDED);
+	regmatch_t pm_data_seg[1];
+	regex_t stop;
+	char* pattern_stop = "\[heap\]]";
+	int p_stop = regcomp(&stop, pattern_stop, REG_EXTENDED);
+	regmatch_t pm_stop[1];
+	
+	char* f_line = NULL;
+	while (!feof(fp)) 
+    {   
+        fgets(f_line, 1024,fp);    
+        printf("%s", f_line);       
+        if(!regexec(&stop,f_line,1,pm_stop,0)){
+        	break;
+        }     
+        else{	//应该只会有一个数据段吧
+        	if(!regexec(&data_seg,f_line,1,pm_data_seg,0){
+				char* start = NULL; char* end = NULL;
+				int point = 0;
+				for(point = pm_data_seg[0].rm_so; point<pm_data_seg[0].rm_eo; point++){
+					if(f_line[point] == '-'){
+						point++;
+						break;
+					}
+					start += f_line[point];
+				}
+				for(; point<pm_data_seg[0].rm_eo; point++){
+					if(f_line[point] == ' ')
+						break;
+					end += f_line[point];
+				}
+				addr_start = atoi(start); addr_end = atoi(end);
+        	}
+        }  
+    } 
+    regfree(data_seg); regfree(stop);	
+}
+int main(int argc, char *argv[]) 
+{
+	for (int i = 0; i < argc; i++) {
+		assert(argv[i]); // specification
+	}
+	assert(!argv[argc]); // specification	
+	if(argc == 1){
+		printf("\033[41;37mError: Please enter the pid!\033[0m\n");
+		exit(1);
+	}
+	strncpy(pid_c, &argv[1], strlen(argv[1]));
+	pid = atoi(pid_c);
+	char* cmd = NULL;
+	init();
+	memset(valid_addr, 0, sizeof(valid_addr));
+	valid_addr_cnt = 0;
+	while(fgets(cmd, 15, stdin) != NULL){
+		if(!strcmp(cmd, "pause")){
+			pause();
+		}
+		else if(!strcmp(cmd, "resume")){
+			resume();
+		}
+		else if(strcmp(cmd, "lookup") > 0){
+			char* command = strtok(cmd, " ");
+			char* num_c = strtok(NULL, " ");
+			num = atoi(num_c);
+			lookup();
+		}
+		else if(!strcmp(cmd, "setup")){
+			char* command = strtok(cmd, " ");
+			char* edit_num_c = strtok(NULL, " ");
+			edit_num = atoi(edit_num_c);
+			setup();
+		}
+		else{
+			printf("\033[41;37mInvalid command! Please enter again!\033[0m\n");
+		}
+		
+	}	
+	return 0;
 }

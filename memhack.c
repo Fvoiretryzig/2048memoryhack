@@ -95,42 +95,43 @@ void init()
 	
 	regex_t data_seg;	
 	char* pattern_data_seg = "[0-9,a-d]{8}-[0-9,a-d]{8}\srw-p";
-	int p_data_seg = regcomp(&data_seg, pattern_data_seg, REG_EXTENDED);
+	/*int p_data_seg =*/ regcomp(&data_seg, pattern_data_seg, REG_EXTENDED);
 	regmatch_t pm_data_seg[1];
 	regex_t stop;
 	char* pattern_stop = "\[heap\]]";
-	int p_stop = regcomp(&stop, pattern_stop, REG_EXTENDED);
+	/*int p_stop*/ = regcomp(&stop, pattern_stop, REG_EXTENDED);
 	regmatch_t pm_stop[1];
 	
 	char* f_line = NULL;
 	while (!feof(fp)) 
     {   
-        fgets(f_line, 1024,fp);    
-        printf("%s", f_line);       
-        if(!regexec(&stop,f_line,1,pm_stop,0)){
-        	break;
-        }     
-        else{	//应该只会有一个数据段吧
-        	if(!regexec(&data_seg,f_line,1,pm_data_seg,0)){
-				char* start = NULL; char* end = NULL;
-				int point = 0;
-				for(point = pm_data_seg[0].rm_so; point<pm_data_seg[0].rm_eo; point++){
-					if(f_line[point] == '-'){
-						point++;
-						break;
+        if(fgets(f_line, 1024,fp)){
+	        printf("%s", f_line);       
+	        if(!regexec(&stop,f_line,1,pm_stop,0)){
+	        	break;
+	        }     
+	        else{	//应该只会有一个数据段吧
+	        	if(!regexec(&data_seg,f_line,1,pm_data_seg,0)){
+					char* start = NULL; char* end = NULL;
+					int point = 0;
+					for(point = pm_data_seg[0].rm_so; point<pm_data_seg[0].rm_eo; point++){
+						if(f_line[point] == '-'){
+							point++;
+							break;
+						}
+						start += f_line[point];
 					}
-					start += f_line[point];
-				}
-				for(; point<pm_data_seg[0].rm_eo; point++){
-					if(f_line[point] == ' ')
-						break;
-					end += f_line[point];
-				}
-				addr_start = atoi(start); addr_end = atoi(end);
-        	}
-        }  
-    } 
+					for(; point<pm_data_seg[0].rm_eo; point++){
+						if(f_line[point] == ' ')
+							break;
+						end += f_line[point];
+					}
+					addr_start = atoi(start); addr_end = atoi(end);
+	        	}
+	        }  
+	    } 
     regfree(&data_seg); regfree(&stop);	
+	}
 }
 int main(int argc, char *argv[]) 
 {

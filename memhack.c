@@ -94,11 +94,11 @@ void init(char* pid_c)
 	FILE* fp = NULL;
 	fp = fopen(filename, "a+");
 	
-	const regex_t data_seg;	
+	regex_t data_seg;	
 	char* pattern_data_seg = "[0-9,a-d]{8}-[0-9,a-d]{8} rw-p";
 	/*int p_data_seg =*/ regcomp(&data_seg, pattern_data_seg, REG_EXTENDED);
 	regmatch_t pm_data_seg[1];
-	const regex_t stop;
+	regex_t stop;
 	char* pattern_stop = "[h,e,a,p]{4}]";
 	/*int p_stop =*/ regcomp(&stop, pattern_stop, REG_EXTENDED);
 	regmatch_t pm_stop[1];

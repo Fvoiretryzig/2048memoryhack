@@ -108,8 +108,10 @@ void init(char* pid_c)
     {   
     	
         if(fgets(f_line, 1024,fp)){
-	        printf("%s", f_line);       
-	        if(!regexec(&stop,f_line,1,pm_stop,0)){
+	        printf("%s", f_line);  
+	        int ret = regexec(&stop,f_line,1,pm_stop,0);
+	        	printf("\033[44;33mret:%d\033[0m\n", reg);
+	        if(!ret){
 	        	break;
 	        }     
 	        else{	//应该只会有一个数据段吧

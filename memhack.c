@@ -113,6 +113,7 @@ void init(char* pid_c)
 	        	break;
 	        }     
 	        else{	//应该只会有一个数据段吧
+	        	printf("\033[45;33min else f_line;%s\033[0m\n",f_line);
 	        	if(!regexec(&data_seg,f_line,1,pm_data_seg,0)){printf("\033[44;33mpid:%d\033[0m\n",pid);
 					char* start = NULL; char* end = NULL;
 					int point = 0;

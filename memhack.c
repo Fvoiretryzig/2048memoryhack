@@ -102,7 +102,7 @@ void init(char* pid_c)
 	char* pattern_stop = "[h,e,a,p]{4}]";
 	/*int p_stop =*/ regcomp(&stop, pattern_stop, REG_EXTENDED);
 	regmatch_t pm_stop[1];
-	
+	printf("\033[42;31mline105\033[0m\n");
 	char* f_line = NULL;
 	while (!feof(fp)) 
     {   

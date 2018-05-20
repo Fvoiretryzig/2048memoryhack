@@ -93,7 +93,7 @@ void init(char* pid_c)
 	strcat(filename, "/maps");
 	FILE* fp = NULL;
 	fp = fopen(filename, "a");
-	
+	printf("\033[42;31mpid:%d\033[0m\n",pid);
 	regex_t data_seg;	
 	char* pattern_data_seg = "[0-9,a-d]{8}-[0-9,a-d]{8} rw-p";
 	/*int p_data_seg =*/ regcomp(&data_seg, pattern_data_seg, REG_EXTENDED);
@@ -148,7 +148,7 @@ int main(int argc, char *argv[])
 	}
 	char* pid_c = malloc(sizeof(*argv[1]));
 	pid_c = argv[1];
-	pid = atoi(pid_c);printf("\033[42;31mpid:%d\033[0m\n",pid);
+	pid = atoi(pid_c);
 	char cmd[15];
 	init(pid_c);
 	memset(valid_addr, 0, sizeof(valid_addr));

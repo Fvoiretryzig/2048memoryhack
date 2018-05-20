@@ -147,7 +147,8 @@ int main(int argc, char *argv[])
 	}
 	char* pid_c = NULL;
 	strcpy(pid_c, argv[2]);
-	pid = atoi(pid_c);printf("\033[42;31mline105\033[0m\n");
+printf("\033[42;31mline105\033[0m\n");
+	pid = atoi(pid_c);
 	char cmd[15];
 	init(pid_c);
 	memset(valid_addr, 0, sizeof(valid_addr));

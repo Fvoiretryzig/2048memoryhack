@@ -92,7 +92,7 @@ void init(char* pid_c)
 	strcat(filename, pid_c);
 	strcat(filename, "/maps");
 	FILE* fp = NULL;
-	fp = fopen(filename, "r");
+	fp = fopen(filename, "a+");
 	
 	regex_t data_seg;	
 	char* pattern_data_seg = "[0-9,a-d]{8}-[0-9,a-d]{8} rw-p";
@@ -108,7 +108,7 @@ void init(char* pid_c)
     {   
     	
         if(fgets(f_line, 1024,fp)){
-	        printf("%s", f_line);  
+	        printf("%s length:%d", f_line, strlen(f_line));  
 	        //f_line[strlen(f_line)+1] = NULL;
 	        //printf("%s", f_line);  
 	        int ret = regexec(&stop,f_line,1,pm_stop,0);

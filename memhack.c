@@ -120,6 +120,7 @@ void init(char* pid_c)
 	        	break;
 	        }     
 	        else{	//应该只会有一个数据段吧
+	        	printf("this is before regexec\n");
 	        	p_data_seg = regexec(&data_seg,f_line,1,pm_data_seg,0);
 	        	printf("\033[44;33mret:%d\033[0m\n", p_data_seg);
 	        	if(!p_data_seg){

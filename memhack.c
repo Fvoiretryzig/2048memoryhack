@@ -115,7 +115,7 @@ void init(char* pid_c)
 	        f_line[strlen(f_line)] = '\0';
 	        f_line[strlen(f_line)+1] = '\0';
 	        p_stop = regexec(&stop,f_line,1,pm_stop,0);
-	        printf("\033[44;33mthis is stop ret:%d\033[0m\n", ret);
+	        printf("\033[44;33mthis is stop ret:%d\033[0m\n", p_stop);
 	        if(!p_stop){
 	        	break;
 	        }     

@@ -85,6 +85,24 @@ void setup()
 	}
 	return;
 }
+int hex_atoi(char* s)
+{
+	int len = strlen(s); int ans = 0;
+	for(int i = 0; i<len; i++){
+		int digital = 0; int pow_result = 1;
+		if(s[i]>47 && s[i]<58){
+			digital = s[i] - 48;
+		}
+		else if(s[i]>96 && s[i]<103){
+			digital = s[i] - 87;
+		}
+		for(int j = 0; j<i; j++){
+			pow_result *= 16;
+		}
+		ans += digital*pow_result;
+	}
+	return ans;
+}
 void init(char* pid_c)
 {
 	char filename[32];
@@ -143,7 +161,7 @@ void init(char* pid_c)
 					}
 					end[end_p] = '\0';
 					printf("\033[44;33mstart:%s end:%s\033[0m\n",start, end);
-					addr_start = atoi(start); addr_end = atoi(end);
+					addr_start = hex_atoi(start); addr_end = hex_atoi(end);
 					printf("\033[44;33mstart:0x%08x end:0x%08x\033[0m\n",addr_start, addr_end);
 	        	}
 	        }  

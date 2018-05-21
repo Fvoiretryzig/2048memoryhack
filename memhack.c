@@ -93,9 +93,6 @@ void init(char* pid_c)
 	strcat(filename, "/maps");
 	FILE* fp = NULL;
 	fp = fopen(filename, "a+");
-
-	
-	
 	while (!feof(fp)) 
     {   
 		/*============data match============*/
@@ -117,18 +114,17 @@ void init(char* pid_c)
 	        f_line[strlen(f_line)-1] = '\0'; 
 	        f_line[strlen(f_line)] = '\0';
 	        f_line[strlen(f_line)+1] = '\0';
-	        printf("before stop match\n");
+	        //printf("before stop match\n");
 	        p_stop = regexec(&stop,f_line,1,pm_stop,0);
 	        printf("\033[44;33mthis is stop ret:%d\033[0m\n", p_stop);
 	        if(!p_stop){
 	        	break;
 	        }     
 	        else{	//应该只会有一个数据段吧
-	        	printf("this is before regexec\n");
+	        	//printf("this is before regexec\n");
 	        	p_data_seg = regexec(&data_seg,f_line,1,pm_data_seg,0);
 	        	printf("\033[44;33mthis is data_seg ret:%d\033[0m\n", p_data_seg);
 	        	if(!p_data_seg){
-	        		printf("\033[44;33mpid:%d\033[0m\n",pid);
 					char* start = NULL; char* end = NULL;
 					int point = 0;
 					for(point = pm_data_seg[0].rm_so; point<pm_data_seg[0].rm_eo; point++){
@@ -138,6 +134,7 @@ void init(char* pid_c)
 						}
 						start += f_line[point];
 					}
+					printf("\033[44;33mpid:%d\033[0m\n",pid);
 					for(; point<pm_data_seg[0].rm_eo; point++){
 						if(f_line[point] == ' ')
 							break;

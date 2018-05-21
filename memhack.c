@@ -208,7 +208,7 @@ int main(int argc, char *argv[])
 				lookup();	
 			}
 			else if(!strcmp(temp1, "setup")){
-				edit_num = atoi(temp);printf("\033[42;37mnum:%d\033[0m\n",edit_num);
+				edit_num = atoi(temp2);printf("\033[42;37mnum:%d\033[0m\n",edit_num);
 				setup();
 			}
 			else{

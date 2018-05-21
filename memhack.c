@@ -85,6 +85,7 @@ void lookup()
 }
 void setup()
 {
+	printf("\033[41;38mthis is in setup\033[0m\n");
 	if(if_pause){
 		ptrace(PTRACE_POKEDATA, pid, edit_addr, edit_num);
 		int data = ptrace(PTRACE_PEEKDATA, pid, edit_addr, NULL);

@@ -67,7 +67,7 @@ void lookup()
 			}
 			if(overlap_cnt == 1){
 				edit_addr = overlap[0];
-				printf("\033[42;37m0x%08x:%d\033[0m\n",edit_addr, data);
+				printf("\033[42;37m0x%08x:%d\033[0m\n",edit_addr, num);
 				return;
 			}
 			else{

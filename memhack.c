@@ -135,12 +135,16 @@ void init(char* pid_c)
 						}
 						start[start_p++] = f_line[point];
 					}
+					start[start_p] = '\0';
 					for(; point<pm_data_seg[0].rm_eo; point++){
 						if(f_line[point] == ' ')
 							break;
 						end[end_p++]= f_line[point];
-					}printf("\033[44;33mstart:%s end:%s\033[0m\n",start, end);
+					}
+					end[end_p] = '\0';
+					printf("\033[44;33mstart:%s end:%s\033[0m\n",start, end);
 					addr_start = atoi(start); addr_end = atoi(end);
+					printf("\033[44;33mstart:0x%08x end:0x%08x\033[0m\n",addr_start, addr_end);
 	        	}
 	        }  
 	    } 

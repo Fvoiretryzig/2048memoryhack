@@ -210,7 +210,10 @@ int main(int argc, char *argv[])
 			else if(!strcmp(temp1, "setup")){
 				edit_num = atoi(temp2);printf("\033[42;37mnum:%d\033[0m\n",edit_num);
 				setup();
-			}
+			}			
+			else if(!strcmp(cmd, "resume")){
+				resume();
+			}	
 			else{
 				printf("\033[41;37mInvalid command! Please enter again!\033[0m\n");
 			}	
@@ -219,9 +222,7 @@ int main(int argc, char *argv[])
 			if(!strcmp(cmd, "pause")){
 				pause();
 			}
-			else if(!strcmp(cmd, "resume")){
-				resume();
-			}		
+	
 			else if(!strcmp(cmd, "exit")){
 				exit(0);
 			}

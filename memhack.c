@@ -88,7 +88,7 @@ void setup()
 int hex_atoi(char* s)
 {
 	int len = strlen(s); int ans = 0;
-	for(int i = 0; i<len; i++){
+	for(int i = len-1; i>=0; i--){
 		int digital = 0; int pow_result = 1;
 		if(s[i]>47 && s[i]<58){
 			digital = s[i] - 48;
@@ -96,7 +96,7 @@ int hex_atoi(char* s)
 		else if(s[i]>96 && s[i]<103){
 			digital = s[i] - 87;
 		}
-		for(int j = 0; j<i; j++){
+		for(int j = 0; j<len-1-i; j++){
 			pow_result *= 16;
 		}
 		ans += digital*pow_result;

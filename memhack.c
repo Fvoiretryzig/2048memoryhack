@@ -212,11 +212,11 @@ int main(int argc, char *argv[])
 			//printf("\033[42;37mnum:%d\033[0m\n",num);
 			lookup();
 		}
-		else if(strcmp(cmd, "setup")>0){
-			char* temp = strtok(cmd, " ");
+		else if(strcmp(cmd, "setup") > 0){
+			char* temp = strtok(cmd, " ");printf("\033[42;37mnum:%d\033[0m\n",edit_num);
 			temp = strtok(NULL, " ");
 			edit_num = atoi(temp);
-			printf("\033[42;37mnum:%d\033[0m\n",edit_num);
+			
 			setup();
 		}
 		else if(!strcmp(cmd, "exit")){

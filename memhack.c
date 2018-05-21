@@ -107,9 +107,10 @@ void init(char* pid_c)
 	}
 	regmatch_t pm_data_seg[1];regmatch_t pm_stop[1];
 	
-	char f_line[1024];
+	
 	while (!feof(fp)) 
     {   
+	    char f_line[1024];
         if(fgets(f_line, 1024,fp)){
 	        printf("%s\nlength:%d\n", f_line, strlen(f_line));  
 	        f_line[strlen(f_line)-1] = '\0'; 

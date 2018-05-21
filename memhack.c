@@ -43,7 +43,6 @@ void lookup()
 			if(data == num){
 				if(valid_addr_cnt == 0){
 					valid_addr[temp_cnt++] = addr;
-					printf("\033[42;37m0x%08x:%d\033[0m\n",valid_addr[temp_cnt-1], data);
 				}
 				else{
 					temp_addr[temp_cnt++] = addr;
@@ -52,6 +51,10 @@ void lookup()
 		}
 		if(valid_addr_cnt == 0){
 			valid_addr_cnt = temp_cnt;
+			if(temp_cnt == 1){
+				edit_addr = valid_addr[0];
+				printf("\033[42;37m0x%08x:%d\033[0m\n",edit_addr, data);
+			}
 			return;
 		}
 		else{
@@ -64,6 +67,7 @@ void lookup()
 			}
 			if(overlap_cnt == 1){
 				edit_addr = overlap[0];
+				printf("\033[42;37m0x%08x:%d\033[0m\n",edit_addr, data);
 				return;
 			}
 			else{

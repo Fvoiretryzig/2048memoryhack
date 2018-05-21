@@ -134,12 +134,12 @@ void init(char* pid_c)
 						}
 						start += f_line[point];
 					}
-					printf("\033[44;33mpid:%d\033[0m\n",pid);
+					
 					for(; point<pm_data_seg[0].rm_eo; point++){
 						if(f_line[point] == ' ')
 							break;
 						end += f_line[point];
-					}
+					}printf("\033[44;33mpid:%d\033[0m\n",pid);
 					addr_start = atoi(start); addr_end = atoi(end);
 	        	}
 	        }  

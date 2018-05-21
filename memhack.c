@@ -199,6 +199,7 @@ int main(int argc, char *argv[])
 	//printf("\033[42;37mline 155\033[0m\n");
 	while(fgets(cmd, sizeof(cmd), stdin)){
 		cmd[strlen(cmd)-1] = '\0';printf("\033[42;31m%s\033[0m\n",cmd);
+		printf("strcmp(cmd, setup):%d\n",strcmp(cmd, "setup"));
 		if(!strcmp(cmd, "pause")){
 			pause();
 		}

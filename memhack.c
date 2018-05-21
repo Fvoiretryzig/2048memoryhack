@@ -209,6 +209,9 @@ int main(int argc, char *argv[])
 			edit_num = atoi(temp);
 			setup();
 		}
+		else if(!strcmp(cmd, "exit")){
+			exit(0);
+		}
 		else{
 			printf("\033[41;37mInvalid command! Please enter again!\033[0m\n");
 		}

@@ -125,7 +125,7 @@ void init(char* pid_c)
 	        	p_data_seg = regexec(&data_seg,f_line,1,pm_data_seg,0);
 	        	printf("\033[44;33mthis is data_seg ret:%d\033[0m\n", p_data_seg);
 	        	if(!p_data_seg){
-					char* start = NULL; char* end = NULL;
+					char start[10]; char end[10];
 					int point = 0;
 					for(point = pm_data_seg[0].rm_so; point<pm_data_seg[0].rm_eo; point++){
 						if(f_line[point] == '-'){

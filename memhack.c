@@ -128,20 +128,20 @@ void init(char* pid_c)
 		regmatch_t pm_data_seg[1];regmatch_t pm_stop[1];
 	    char f_line[1024];
         if(fgets(f_line, 1024,fp)){
-	        printf("%s\nlength:%d\n", f_line, strlen(f_line));  
+	        //printf("%s\nlength:%d\n", f_line, strlen(f_line));  
 	        f_line[strlen(f_line)-1] = '\0'; 
 	        f_line[strlen(f_line)] = '\0';
 	        f_line[strlen(f_line)+1] = '\0';
 	        //printf("before stop match\n");
 	        p_stop = regexec(&stop,f_line,1,pm_stop,0);
-	        printf("\033[44;33mthis is stop ret:%d\033[0m\n", p_stop);
+	        //printf("\033[44;33mthis is stop ret:%d\033[0m\n", p_stop);
 	        if(!p_stop){
 	        	break;
 	        }     
 	        else{	//应该只会有一个数据段吧
 	        	//printf("this is before regexec\n");
 	        	p_data_seg = regexec(&data_seg,f_line,1,pm_data_seg,0);
-	        	printf("\033[44;33mthis is data_seg ret:%d\033[0m\n", p_data_seg);
+	        	//printf("\033[44;33mthis is data_seg ret:%d\033[0m\n", p_data_seg);
 	        	if(!p_data_seg){
 					char start[10]; char end[10];
 					int point = 0;
@@ -160,7 +160,7 @@ void init(char* pid_c)
 						end[end_p++]= f_line[point];
 					}
 					end[end_p] = '\0';
-					printf("\033[44;33mstart:%s end:%s\033[0m\n",start, end);
+					//printf("\033[44;33mstart:%s end:%s\033[0m\n",start, end);
 					addr_start = hex_atoi(start); addr_end = hex_atoi(end);
 					printf("\033[44;33mstart:0x%08x end:0x%08x\033[0m\n",addr_start, addr_end);
 	        	}
@@ -171,10 +171,10 @@ void init(char* pid_c)
 }
 int main(int argc, char *argv[]) 
 {
-	printf("\033[42;37mline 140\033[0m\n");
+	//printf("\033[42;37mline 140\033[0m\n");
 	for (int i = 0; i < argc; i++) {
 		assert(argv[i]); // specification
-		printf("argv[%d] = %s\n", i, argv[i]);
+		//printf("argv[%d] = %s\n", i, argv[i]);
 	}
 	assert(!argv[argc]); // specification	
 	if(argc == 1){
@@ -188,9 +188,9 @@ int main(int argc, char *argv[])
 	init(pid_c);
 	memset(valid_addr, 0, sizeof(valid_addr));
 	valid_addr_cnt = 0;
-	printf("\033[42;37mline 155\033[0m\n");
+	//printf("\033[42;37mline 155\033[0m\n");
 	while(fgets(cmd, sizeof(cmd), stdin)){
-		printf("\033[42;31mhahaha\033[0m\n");
+		printf("\033[42;31m%s\033[0m\n",cmd);
 		if(!strcmp(cmd, "pause")){
 			pause();
 		}

@@ -190,7 +190,7 @@ int main(int argc, char *argv[])
 	valid_addr_cnt = 0;
 	//printf("\033[42;37mline 155\033[0m\n");
 	while(fgets(cmd, sizeof(cmd), stdin)){
-		cmd[strlen(cmd)-1] = '\0';printf("\033[42;35m%s\033[0m\n",cmd);
+		cmd[strlen(cmd)-1] = '\0';printf("\033[42;36m%s\033[0m\n",cmd);
 		if(!strcmp(cmd, "pause")){
 			pause();
 		}

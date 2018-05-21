@@ -133,12 +133,12 @@ void init(char* pid_c)
 							break;
 						}
 						start += f_line[point];
-					}
+					}printf("\033[44;33mstart:%s end:%s\033[0m\n",start, end);
 					for(; point<pm_data_seg[0].rm_eo; point++){
 						if(f_line[point] == ' ')
 							break;
 						end += f_line[point];
-					}printf("\033[44;33mstart:%s end:%s\033[0m\n",start, end);
+					}
 					addr_start = atoi(start); addr_end = atoi(end);
 	        	}
 	        }  

@@ -53,7 +53,7 @@ void lookup()
 			valid_addr_cnt = temp_cnt;
 			if(temp_cnt == 1){
 				edit_addr = valid_addr[0];
-				printf("\033[42;37m0x%08x:%d\033[0m\n",edit_addr, data);
+				printf("\033[42;37m0x%08x:%d\033[0m\n",edit_addr, num);
 			}
 			return;
 		}

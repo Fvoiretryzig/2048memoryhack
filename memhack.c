@@ -87,6 +87,8 @@ void setup()
 {
 	if(if_pause){
 		ptrace(PTRACE_POKEDATA, pid, edit_addr, edit_num);
+		int data = ptrace(PTRACE_PEEKDATA, pid, edit_addr, NULL);
+		printf("\033[42;37mafter setup:0x%08x:%d\033[0m\n",edit_addr, data);
 	}
 	return;
 }

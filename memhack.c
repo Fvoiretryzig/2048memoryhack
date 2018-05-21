@@ -96,12 +96,16 @@ void init(char* pid_c)
 	
 	regex_t data_seg;	
 	char* pattern_data_seg = "[0-9,a-d]{8}-[0-9,a-d]{8} rw-p";
-	/*int p_data_seg =*/ regcomp(&data_seg, pattern_data_seg, REG_EXTENDED);
+	int p_data_seg = regcomp(&data_seg, pattern_data_seg, REG_EXTENDED);
 	regmatch_t pm_data_seg[1];
 	regex_t stop;
 	char* pattern_stop = "[h,e,a,p]{4}";
-	/*int p_stop =*/ regcomp(&stop, pattern_stop, REG_EXTENDED);
+	int p_stop = regcomp(&stop, pattern_stop, REG_EXTENDED);
 	regmatch_t pm_stop[1];
+	printf("data seg:%d stop:%d\n", p_data_seg, p_stop);
+	if(p_data_seg != 0 || p_stop != 0){
+		printf("\033[46;37mError when compile regs\033[0m\n");
+	}
 	
 	char f_line[1024];
 	while (!feof(fp)) 

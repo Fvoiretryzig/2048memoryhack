@@ -109,11 +109,11 @@ void init(char* pid_c)
 	char f_line[1024];
 	while (!feof(fp)) 
     {   
-    	
         if(fgets(f_line, 1024,fp)){
 	        printf("%s length:%d\n", f_line, strlen(f_line));  
-	        f_line[strlen(f_line)-1] = '\0';
-	        printf("%s\n", f_line);  
+	        f_line[strlen(f_line)-1] = '\0'; 
+	        f_line[strlen(f_line)] = '\0';
+	        f_line[strlen(f_line)+1] = '\0';
 	        p_stop = regexec(&stop,f_line,1,pm_stop,0);
 	        //printf("\033[44;33mret:%d\033[0m\n", ret);
 	        if(!p_stop){
@@ -122,7 +122,8 @@ void init(char* pid_c)
 	        else{	//应该只会有一个数据段吧
 	        	p_data_seg = regexec(&data_seg,f_line,1,pm_data_seg,0);
 	        	printf("\033[44;33mret:%d\033[0m\n", p_data_seg);
-	        	if(!p_data_seg){printf("\033[44;33mpid:%d\033[0m\n",pid);
+	        	if(!p_data_seg){
+	        		printf("\033[44;33mpid:%d\033[0m\n",pid);
 					char* start = NULL; char* end = NULL;
 					int point = 0;
 					for(point = pm_data_seg[0].rm_so; point<pm_data_seg[0].rm_eo; point++){

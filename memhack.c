@@ -216,6 +216,7 @@ int main(int argc, char *argv[])
 			char* temp = strtok(cmd, " ");
 			temp = strtok(NULL, " ");
 			edit_num = atoi(temp);
+			printf("\033[42;37mnum:%d\033[0m\n",edit_num);
 			setup();
 		}
 		else if(!strcmp(cmd, "exit")){

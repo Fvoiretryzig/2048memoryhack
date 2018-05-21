@@ -40,6 +40,7 @@ void lookup()
 	if(if_pause){
 		for(int addr = addr_start; addr<addr_end; addr=addr+4){
 			int data = ptrace(PTRACE_PEEKDATA, pid, addr, NULL);
+			printf("\033[42;37m0x%08x:%d\033[0m\n",addr, data);
 			if(data == num){
 				if(valid_addr_cnt == 0){
 					valid_addr[temp_cnt++] = addr;
@@ -201,7 +202,7 @@ int main(int argc, char *argv[])
 			char* temp = strtok(cmd, " ");
 			temp = strtok(NULL, " ");
 			num = atoi(temp);
-			printf("\033[42;37mnum:%d\033[0m\n",num);
+			//printf("\033[42;37mnum:%d\033[0m\n",num);
 			lookup();
 		}
 		else if(!strcmp(cmd, "setup")){

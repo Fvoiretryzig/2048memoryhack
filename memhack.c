@@ -42,8 +42,8 @@ void lookup()
 			int data = ptrace(PTRACE_PEEKDATA, pid, addr, NULL);
 			if(data == num){
 				if(valid_addr_cnt == 0){
-					printf("\033[42;37m0x%08x:%d\033[0m\n",valid_addr[temp_cnt++], data);
 					valid_addr[temp_cnt++] = addr;
+					printf("\033[42;37m0x%08x:%d\033[0m\n",valid_addr[temp_cnt-1], data);
 				}
 				else{
 					temp_addr[temp_cnt++] = addr;

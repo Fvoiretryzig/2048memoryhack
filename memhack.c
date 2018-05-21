@@ -127,18 +127,19 @@ void init(char* pid_c)
 	        	if(!p_data_seg){
 					char start[10]; char end[10];
 					int point = 0;
+					int start_p = 0; int end_p = 0;
 					for(point = pm_data_seg[0].rm_so; point<pm_data_seg[0].rm_eo; point++){
 						if(f_line[point] == '-'){
 							point++;
 							break;
 						}
-						start += f_line[point];
-					}printf("\033[44;33mstart:%s end:%s\033[0m\n",start, end);
+						start[start_p++] = f_line[point];
+					}
 					for(; point<pm_data_seg[0].rm_eo; point++){
 						if(f_line[point] == ' ')
 							break;
-						end += f_line[point];
-					}
+						end[end_p++]= f_line[point];
+					}printf("\033[44;33mstart:%s end:%s\033[0m\n",start, end);
 					addr_start = atoi(start); addr_end = atoi(end);
 	        	}
 	        }  

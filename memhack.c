@@ -198,10 +198,10 @@ int main(int argc, char *argv[])
 			resume();
 		}
 		else if(strcmp(cmd, "lookup") > 0){
-			printf("\033[42;37mthis is lookup\033[0m\n");
 			char* temp = strtok(cmd, " ");
 			temp = strtok(NULL, " ");
 			num = atoi(temp);
+			printf("\033[42;37mnum:%d\033[0m\n",num);
 			lookup();
 		}
 		else if(!strcmp(cmd, "setup")){

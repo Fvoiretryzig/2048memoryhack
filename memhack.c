@@ -85,7 +85,7 @@ void lookup()
 }
 void setup()
 {
-	printf("\033[41;38mthis is in setup\033[0m\n");
+	//printf("\033[41;38mthis is in setup\033[0m\n");
 	if(if_pause){
 		ptrace(PTRACE_POKEDATA, pid, edit_addr, edit_num);
 		int data = ptrace(PTRACE_PEEKDATA, pid, edit_addr, NULL);
@@ -199,7 +199,7 @@ int main(int argc, char *argv[])
 	//printf("\033[42;37mline 155\033[0m\n");
 	while(fgets(cmd, sizeof(cmd), stdin)){
 		int len = strlen(cmd);
-		cmd[len-1] = '\0';printf("\033[42;31m%s\033[0m\n",cmd);
+		cmd[len-1] = '\0';//printf("\033[42;31m%s\033[0m\n",cmd);
 		if(len>6){
 			char* temp1 = strtok(cmd, " ");
 			char* temp2 = strtok(NULL, " ");

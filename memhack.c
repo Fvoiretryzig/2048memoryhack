@@ -198,15 +198,38 @@ int main(int argc, char *argv[])
 	valid_addr_cnt = 0;
 	//printf("\033[42;37mline 155\033[0m\n");
 	while(fgets(cmd, sizeof(cmd), stdin)){
-		cmd[strlen(cmd)-1] = '\0';printf("\033[42;31m%s\033[0m\n",cmd);
-		printf("strcmp(cmd, setup):%d\n",strcmp(cmd, "setup"));
-		if(!strcmp(cmd, "pause")){
-			pause();
+		int len = strlen(cmd);
+		cmd[len-1] = '\0';printf("\033[42;31m%s\033[0m\n",cmd);
+		if(len>6){
+			char* temp1 = strtok(cmd, " ");
+			char* temp2 = strtok(NULL, " ");
+			if(!strcmp(temp1, "lookup")){
+				num = atoi(temp2);
+				lookup();	
+			}
+			else if(!strcmp(temp1, "setup")){
+				edit_num = atoi(temp);printf("\033[42;37mnum:%d\033[0m\n",edit_num);
+				setup();
+			}
+			else{
+				printf("\033[41;37mInvalid command! Please enter again!\033[0m\n");
+			}	
 		}
-		else if(!strcmp(cmd, "resume")){
-			resume();
+		else{
+			if(!strcmp(cmd, "pause")){
+				pause();
+			}
+			else if(!strcmp(cmd, "resume")){
+				resume();
+			}		
+			else if(!strcmp(cmd, "exit")){
+				exit(0);
+			}
+			else{
+				printf("\033[41;37mInvalid command! Please enter again!\033[0m\n");
+			}			
 		}
-		else if(strcmp(cmd, "lookup") > 0){
+		/*else if(strcmp(cmd, "lookup") > 0){
 			char* temp = strtok(cmd, " ");
 			temp = strtok(NULL, " ");
 			num = atoi(temp);
@@ -214,19 +237,13 @@ int main(int argc, char *argv[])
 			lookup();
 		}
 		else if(strcmp(cmd, "setup") > 0){
-			char* temp = strtok(cmd, " ");printf("\033[42;37mnum:%d\033[0m\n",edit_num);
+			char* temp = strtok(cmd, " ");
 			temp = strtok(NULL, " ");
 			edit_num = atoi(temp);
 			
 			setup();
-		}
-		else if(!strcmp(cmd, "exit")){
-			exit(0);
-		}
-		else{
-			printf("\033[41;37mInvalid command! Please enter again!\033[0m\n");
-		}
-		
+		}*/
+
 	}	
 	return 0;
 }
